@@ -113,7 +113,7 @@ class TicTacToe extends Component {
         let tic = (
             <div>
                 <p className='paraText'> This is where we play Tic Tac Toe.</p>
-                <Board clicked={this.makeChoice} checked={this.checkBoardMap} />
+                <Board clicked={this.makeChoice}  />
                 <p className='paraText'> Click on the Board squares to make your choice depending on whose turn it is.</p>
                 <p className='paraText'> Right now it is Player {this.state.turn}'s choice.</p>
             </div>
