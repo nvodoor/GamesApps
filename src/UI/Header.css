@@ -1,0 +1,11 @@
+.Header {
+    height: 50px;
+    background-color: blanchedalmond;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Title {
+    margin: 0;
+}

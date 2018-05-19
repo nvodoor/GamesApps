@@ -1,0 +1,22 @@
+.navbar {
+   width: 100%;
+   max-width: 100%;
+   height: 20px;
+   background-color: black;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   float: none;
+}
+
+.Menu {
+    display: flex;
+    flex-flow: row;
+    list-style: none;
+}
+
+.Piece a {
+    padding-right: 50px;
+    color: white;
+    text-decoration-line: none;
+}
