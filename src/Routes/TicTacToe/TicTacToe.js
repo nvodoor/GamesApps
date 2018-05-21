@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Board from './Board.js';
 import './TicTacToe.css';
+import axios from 'axios';
 
 class TicTacToe extends Component {
 
@@ -10,7 +11,16 @@ class TicTacToe extends Component {
         boardMapX: [],
         boardMapO: [],
         victory: false,
-        victor: 0
+        victor: 0,
+    }
+
+    uploadScore = () => {
+        axios.post('http://localhost:8080/post/tictactoe', {
+            victor: this.state.victor
+        })
+        .then(res => {
+            console.log(res);
+        })
     }
 
     checkBoardMap = () => {
@@ -122,6 +132,7 @@ class TicTacToe extends Component {
             tic = (
                 <div>
                     <p className='paraText'>Congrats! The game was complete. There is a victory! Player#{this.state.victor} was victorious!</p>
+                    {this.uploadScore()}
                 </div>
             )
         } 

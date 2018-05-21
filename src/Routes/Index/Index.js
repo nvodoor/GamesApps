@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import '../../App.css';
+import axios from 'axios';
 
-const index = () => (
-    <div>
-        <p className="para">This is the home page for the Games App. Come play!</p>
-    </div>
-)
+class Index extends Component {
 
-export default index;
+    componentDidMount() {
+        axios.get('http://localhost:8080/ping')
+        .then(res => {
+            console.log(res.data);
+        })
+    }
+
+    render () {
+        return (
+            <div>
+                <p className="para">This is the home page for the Games App. Come play!</p>
+            </div>
+        )
+    }
+}
+
+export default Index;

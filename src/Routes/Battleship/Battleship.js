@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../../App.css';
 import BattleBoard from './BattleBoard.js';
 import './Battleship.css';
+import axios from 'axios';
 
 class Battleship extends Component {
 
@@ -33,6 +34,19 @@ class Battleship extends Component {
         }
     }
 
+    componentDidUpdate () {
+        if (this.state.winner === '') {
+            this.renderButton();
+        } else {
+            axios.post('http://localhost:8080/post/battleship', {
+                winner: this.state.winner
+            })
+            .then(res => {
+                console.log(res);
+            })
+        }
+    }
+
     handleClick = (e) => {
         let value = parseInt(e.target.id)
         if (this.state.playerLocs.includes(parseInt(e.target.id))) {
@@ -51,10 +65,14 @@ class Battleship extends Component {
             this.state.picks[2].push('X')
         }
         if (this.state.picks[0].length === 3) {
-            this.state.winner = 'Player'
+            this.setState({
+                winner: 'Player'
+            })
         }
         if (this.state.picks[1].length === 3) {
-            this.state.winner = 'Computer'
+            this.setState({
+                winner: 'Computer'
+            })
         }
         if (this.state.turn === 'player' || this.state.turn === '') {
             this.setState({
@@ -65,6 +83,26 @@ class Battleship extends Component {
                 turn: 'player'
             })
         }
+    }
+    
+    displayPlayer = () => {
+        let show = document.querySelector('.paraplus');
+        show.style.display = "inline-block";
+        let unshow = document.querySelector('#buttonplay');
+        unshow.style.display = "none";
+
+    }
+
+    displayComputer = () => {
+        let see = document.querySelector('.paraplus')
+        see.style.display = "inline-block";
+        let unsee= document.querySelector('#computerplay');
+        unsee.style.display = "none";
+    }
+
+    renderButton = () => {
+        document.querySelector('.paraplus').style.display = 'none';
+        document.querySelector('button').style.display = 'inline-block';
     }
 
     render () {
@@ -81,7 +119,8 @@ class Battleship extends Component {
             turns = (
                 <div className="turnbox">
                     <p className="para">This turn is for the player.</p>
-                    <ul className="paraplus">{listPlayer}</ul>
+                    <button type="button" id="buttonplay" onClick={this.displayPlayer}>Display</button>
+                    <ul className="paraplus" >{listPlayer}</ul>
                 </div>
             )
         } 
@@ -92,6 +131,7 @@ class Battleship extends Component {
             turns = (
                 <div className="turnbox">
                     <p className="para">This turn is for the computer.</p>
+                    <button type="button" id="computerplay" onClick={this.displayComputer}>Display</button>
                     <ul className="paraplus">
                         {listComputer}
                     </ul>
@@ -99,6 +139,7 @@ class Battleship extends Component {
             )
         }
         if (this.state.winner !== '') {
+            axios.post('https')
             return (
                 <div>
                     <p className="para">The winner is: {this.state.winner}</p>
